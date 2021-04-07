@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="Stopwatch"
+  >
+    <div
+      class="Stopwatch-header"
+    >
+      Stopwatch
+    </div>
+    <div
+      class="Stopwatch-display"
+    >
+      00 : 00 : 00 : 00
+      <button>
+        Start
+      </button>
+    </div>
+  </div>
+</DocumentFragment>
+`;
