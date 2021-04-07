@@ -13,9 +13,9 @@ const Stopwatch = () => {
     const { timerTime, timerOn } = timer;
 
     useEffect(() => {
-        /* Run timer if timerOn is true */
         if (timerOn) {
             timerId.current = setInterval(() => {
+                // update timerTime every 10ms
                 setTimer(timer => {
                     return {
                         ...timer,
@@ -70,19 +70,19 @@ const Stopwatch = () => {
             <div className="Stopwatch-header">Stopwatch</div>
             <div className="Stopwatch-display">
                 {hours} : {minutes} : {seconds} : {centiseconds}
-                {timerOn === false && timerTime === 0 && (
-                    <button onClick={startTimer}>Start</button>
-                )}
-                {timerOn === true && (
-                    <button onClick={stopTimer}>Stop</button>
-                )}
-                {timerOn === false && timerTime > 0 && (
-                    <button onClick={startTimer}>Resume</button>
-                )}
-                {timerOn === false && timerTime > 0 && (
-                    <button onClick={resetTimer}>Reset</button>
-                )}
             </div>
+            {timerOn === false && timerTime === 0 && (
+                <button onClick={startTimer}>Start</button>
+            )}
+            {timerOn === true && (
+                <button onClick={stopTimer}>Stop</button>
+            )}
+            {timerOn === false && timerTime > 0 && (
+                <button onClick={startTimer}>Resume</button>
+            )}
+            {timerOn === false && timerTime > 0 && (
+                <button onClick={resetTimer}>Reset</button>
+            )}
         </div>
     );
 }

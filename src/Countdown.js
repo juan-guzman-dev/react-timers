@@ -5,7 +5,7 @@ import "./Countdown.css";
 const Countdown = () => {
     const INITIAL_STATE = {
         timerOn: false, // boolean value for if the timer is on
-        timerStart: 0, // the Unix Epoch (ms after 1970) time when the timer was started (or the past projected start time if the timer is resumed)
+        timerStart: 0, // countdown time
         timerTime: 0 // total time (ms) that the timer has been running since start/reset
     };
 
@@ -14,7 +14,6 @@ const Countdown = () => {
     const { timerTime, timerStart, timerOn } = timer;
 
     useEffect(() => {
-        /* Run timer if timerOn is true */
         if (timerOn) {
             timerId.current = setInterval(() => {
                 const newTime = timerTime - 10;
@@ -44,7 +43,7 @@ const Countdown = () => {
 
     const startTimer = () => {
         if (timerTime === 0) {
-            alert("set up your timer")
+            alert("Select a countdown time")
             return
         }
         setTimer(timer => {
@@ -67,6 +66,16 @@ const Countdown = () => {
         });
     };
 
+    const resumeTimer = () => {
+        setTimer(timer => {
+            return {
+                ...timer,
+                timerOn: true,
+                timerTime: timer.timerTime
+            }
+        });
+    };
+
     const resetTimer = () => {
         if (timerOn === false) {
             setTimer(timer => {
@@ -80,7 +89,14 @@ const Countdown = () => {
 
     const adjustTimer = input => {
         const max = 216000000;
+        // only allow adjust when timer is off
         if (!timerOn) {
+            setTimer(timer => {
+                return {
+                    ...timer,
+                    timerStart: 0
+                }
+            });
             if (input === "incHours" && timerTime + 3600000 < max) {
                 setTimer(timer => {
                     return {
@@ -161,7 +177,7 @@ const Countdown = () => {
             )}
             {timerOn === false &&
                 (timerStart !== 0 && timerStart !== timerTime && timerTime !== 0) && (
-                    <button className="Button-start" onClick={startTimer}>
+                    <button className="Button-start" onClick={resumeTimer}>
                         Resume
                     </button>
                 )}
